@@ -1,4 +1,4 @@
-package com.tasko.tasko.controller;
+package com.tasko.Tasko.controller;
 
 import com.tasko.Tasko.dto.WorkSpaceDTO;
 import com.tasko.Tasko.model.WorkSpace;

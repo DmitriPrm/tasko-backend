@@ -1,4 +1,4 @@
-package com.tasko.tasko.repository;
+package com.tasko.Tasko.repository;
 
 import com.tasko.Tasko.model.WorkSpace;
 import org.springframework.data.jpa.repository.JpaRepository;

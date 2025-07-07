@@ -1,4 +1,4 @@
-package com.tasko.tasko.dto;
+package com.tasko.Tasko.dto;
 
 import lombok.Data;
 

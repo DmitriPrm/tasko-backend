@@ -1,9 +1,8 @@
-package com.tasko.tasko.controller;
+package com.tasko.Tasko.controller;
 
 import com.tasko.Tasko.dto.TaskDTO;
 import com.tasko.Tasko.model.Task;
 import com.tasko.Tasko.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

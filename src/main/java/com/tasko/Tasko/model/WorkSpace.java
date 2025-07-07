@@ -1,4 +1,4 @@
-package com.tasko.tasko.model;
+package com.tasko.Tasko.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

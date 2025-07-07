@@ -1,4 +1,4 @@
-package com.tasko.tasko.service;
+package com.tasko.Tasko.service;
 
 import com.tasko.Tasko.dto.TaskDTO;
 import com.tasko.Tasko.model.Task;
