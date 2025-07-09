@@ -34,6 +34,19 @@ public class AuthController {
     private final BCryptPasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
 
+    private AuthResponse generateAuthResponse(String username, String password) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        username,
+                        password
+                )
+        );
+
+        final UserDetails user = userDetailsService.loadUserByUsername(username);
+        final String jwt = jwtUtils.generateToken(user);
+        return new AuthResponse(jwt);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         if(userRepository.existsByUsername(request.getUsername())) {
@@ -45,25 +58,19 @@ public class AuthController {
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-//        Role userRole = roleRepository.findByName("ROLE_USER")
-//                .orElseThrow(() -> new RuntimeException(("Error: Role USER not found")));
-//        user.setRoles(Set.of(userRole));
+        Role userRole = roleRepository.findByName("ROLE_USER")
+                .orElseThrow(() -> new RuntimeException(("Error: Role USER not found")));
+        user.setRoles(Set.of(userRole));
 
         userRepository.save(user);
-        return ResponseEntity.ok("User registered successfully");
+
+        AuthResponse authResponse = generateAuthResponse(request.getUsername(), request.getPassword());
+        return ResponseEntity.ok(authResponse);
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
-
-        final UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
-        final String jwt = jwtUtils.generateToken(user);
-        return ResponseEntity.ok(new AuthResponse(jwt));
+        AuthResponse response = generateAuthResponse(request.getUsername(), request.getPassword());
+        return ResponseEntity.ok(response);
     }
 }

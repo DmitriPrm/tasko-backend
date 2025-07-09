@@ -18,4 +18,6 @@ public class WorkSpace {
 
     @Column(nullable=false)
     private String title;
+
+    private String description;
 }

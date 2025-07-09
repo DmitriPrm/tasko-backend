@@ -17,6 +17,7 @@ public class WorkSpaceService {
         WorkSpace workSpace = new WorkSpace();
         workSpace.setId(workSpaceDTO.getId());
         workSpace.setTitle(workSpaceDTO.getTitle());
+        workSpace.setDescription(workSpaceDTO.getDescription());
         return workSpaceRepository.save(workSpace);
     }
 
@@ -31,6 +32,7 @@ public class WorkSpaceService {
     public WorkSpace updateWorkSpace(Long id, WorkSpaceDTO workSpaceDTO) {
         WorkSpace workSpace = getWorkSpaceById(id);
         workSpace.setTitle(workSpaceDTO.getTitle());
+        workSpace.setDescription(workSpaceDTO.getDescription());
         return workSpaceRepository.save(workSpace);
     }
 
