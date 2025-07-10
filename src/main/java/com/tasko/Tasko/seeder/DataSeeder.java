@@ -25,24 +25,22 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Role userRole = new Role();
-        userRole.setName("ROLE_USER");
-        roleRepository.save(userRole);
+        if(roleRepository.findByName("ROLE_USER").isEmpty()) {
+            Role userRole = new Role();
+            userRole.setName("ROLE_USER");
+            roleRepository.save(userRole);
+        }
 
-        Role adminRole = new Role();
-        adminRole.setName("ROLE_ADMIN");
-        roleRepository.save(adminRole);
+        if(roleRepository.findByName("ROLE_ADMIN").isEmpty()) {
+            Role adminRole = new Role();
+            adminRole.setName("ROLE_ADMIN");
+            roleRepository.save(adminRole);
 
-        User user = new User();
-        user.setUsername("user");
-        user.setPassword(passwordEncoder.encode("userpassword"));
-        user.setRoles(Set.of(userRole));
-        userRepository.save(user);
-
-        User admin = new User();
-        admin.setUsername("admin");
-        admin.setPassword(passwordEncoder.encode("adminpassword"));
-        admin.setRoles(Set.of(adminRole));
-        userRepository.save(admin);
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(passwordEncoder.encode("adminpassword"));
+            admin.setRoles(Set.of(adminRole));
+            userRepository.save(admin);
+        }
     }
 }
