@@ -1,5 +1,6 @@
 package com.tasko.Tasko.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,9 @@ public class Task {
     private String description;
 
     private LocalDateTime dueDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "work_space_id")
+    @JsonIgnore
+    private WorkSpace workSpace;
 }

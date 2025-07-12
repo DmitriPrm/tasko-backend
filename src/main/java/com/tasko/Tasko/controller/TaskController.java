@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api/work-space/{workSpaceId}/tasks")
 public class TaskController {
     private final TaskService taskService;
 
@@ -18,13 +18,13 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> create(@RequestBody TaskDTO taskDTO) {
-        return ResponseEntity.ok(taskService.createTask(taskDTO));
+    public ResponseEntity<Task> create(@PathVariable Long workSpaceId, @RequestBody TaskDTO taskDTO) {
+        return ResponseEntity.ok(taskService.createTask(workSpaceId, taskDTO));
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks() {
-        return ResponseEntity.ok(taskService.getAllTasks());
+    public ResponseEntity<List<Task>> getTasksByWorkSpaceId(@PathVariable Long workSpaceId) {
+        return ResponseEntity.ok(taskService.getTasksByWorkSpace(workSpaceId));
     }
 
     @GetMapping("/{id}")
