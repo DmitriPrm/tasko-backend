@@ -20,4 +20,7 @@ public class WorkSpace {
     private String title;
 
     private String description;
+
+    @Column(name="image_path")
+    private String imagePath;
 }

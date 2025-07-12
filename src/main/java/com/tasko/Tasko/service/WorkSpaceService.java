@@ -18,6 +18,7 @@ public class WorkSpaceService {
         workSpace.setId(workSpaceDTO.getId());
         workSpace.setTitle(workSpaceDTO.getTitle());
         workSpace.setDescription(workSpaceDTO.getDescription());
+        workSpace.setImagePath(workSpaceDTO.getImagePath());
         return workSpaceRepository.save(workSpace);
     }
 
