@@ -34,6 +34,10 @@ public class TaskService {
         return taskRepository.findByWorkSpaceId(workSpaceId);
     }
 
+    public List<Task> getMyTasks() {
+        return taskRepository.findAll();
+    }
+
     public Task getTaskById(Long id) {
         return taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
     }
