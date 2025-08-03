@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class TaskDTO {
+public class CreateTaskRequest {
     private String title;
     private String description;
     private LocalDateTime dueDate;

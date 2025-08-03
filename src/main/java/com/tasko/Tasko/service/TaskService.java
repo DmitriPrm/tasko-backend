@@ -1,6 +1,8 @@
 package com.tasko.Tasko.service;
 
+import com.tasko.Tasko.dto.CreateTaskRequest;
 import com.tasko.Tasko.dto.TaskDTO;
+import com.tasko.Tasko.model.Tag;
 import com.tasko.Tasko.model.Task;
 import com.tasko.Tasko.model.WorkSpace;
 import com.tasko.Tasko.repository.TaskRepository;
@@ -26,8 +28,22 @@ public class TaskService {
         task.setDescription(taskDTO.getDescription());
         task.setDueDate(taskDTO.getDueDate());
         task.setWorkSpace(workSpace);
+        task.setTags(getTags(taskDTO, task));
 
         return taskRepository.save(task);
+    }
+
+    private List<Tag> getTags(TaskDTO taskDTO, Task task) {
+        List<Tag> tags = taskDTO.getTags().stream()
+                .map(tag -> {
+                    Tag newTag = new Tag();
+                    newTag.setTitle(tag.getTitle());
+                    newTag.setColor(tag.getColor());
+                    newTag.setTask(task);
+                    return newTag;
+                })
+                .toList();
+        return tags;
     }
 
     public List<Task> getTasksByWorkSpace(Long workSpaceId) {
@@ -47,6 +63,7 @@ public class TaskService {
         task.setTitle(taskDTO.getTitle());
         task.setDescription(taskDTO.getDescription());
         task.setDueDate(taskDTO.getDueDate());
+        task.setTags(getTags(taskDTO, task));
         return taskRepository.save(task);
     }
 

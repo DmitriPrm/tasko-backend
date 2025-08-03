@@ -6,16 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name="tasks")
-public class Task {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "tags")
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,15 +20,10 @@ public class Task {
     @Column(nullable = false)
     private String title;
 
-    private String description;
-
-    private LocalDateTime dueDate;
+    private String color;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_space_id")
+    @JoinColumn(name = "task_id", nullable = false)
     @JsonIgnore
-    private WorkSpace workSpace;
-
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tag> tags = new ArrayList<>();
+    private Task task;
 }
